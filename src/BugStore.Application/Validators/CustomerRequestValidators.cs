@@ -10,25 +10,25 @@ public class CustomerRequestValidator : AbstractValidator<CustomerRequest>
     {        
              RuleFor(x => x.Name)
             .NotEmpty()
-            .WithMessage("Name é obrigatório")
+            .WithMessage("Nome é Obrigatório")
             .Must(name => !string.IsNullOrWhiteSpace(name))
-            .WithMessage("Nome é obrigatório")
-            .MaximumLength(100)
-            .WithMessage("O nome deve ter no máximo 100 caracteres");
+            .WithMessage("Nome é Obrigatório")
+            .MaximumLength(50)
+            .WithMessage("O nome deve ter no máximo 50 caracteres");
 
         RuleFor(x => x.Email)
             .NotEmpty()
-            .WithMessage("O email é obrigatório")
+            .WithMessage("Email é Obrigatório")
             .Must(name => !string.IsNullOrWhiteSpace(name))
-            .WithMessage("Email é obrigatório")
+            .WithMessage("Email é Obrigatório")
             .EmailAddress()
             .WithMessage("Email inválido");
 
         RuleFor(x => x.Phone)
             .NotEmpty()
-            .WithMessage("O telefone é obrigatório")
+            .WithMessage("Telefone é Obrigatório")
             .Matches(@"^\d{10,11}$")
-            .WithMessage("O telefone deve ter entre 10 e 11 dígitos");
+            .WithMessage("O Telefone deve ter entre 10 e 11 dígitos");
 
         RuleFor(x => x.BirthDate)
             .NotEmpty()
