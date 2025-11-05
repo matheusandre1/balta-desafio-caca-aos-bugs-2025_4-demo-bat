@@ -14,7 +14,7 @@ public class CustomerServiceTests
 {
     private readonly IFixture _fixture;
     private readonly Mock<IRepository<Customer>> _customerRepositoryMock;
-    private readonly CustomerService _customerService;
+    private readonly ICustomerService _customerService;
     private readonly IMapper _mapper;
 
     public CustomerServiceTests()

@@ -37,6 +37,8 @@ public class ProductService(IRepository<Product> _productRepository,
     {
         var entity = await _productRepository.GetByIdAsync(id);
 
+        if (entity is null) throw new Exception("Product Not Found");
+
         entity.UpdateWith(productDtoRequest.Title, productDtoRequest.Description, productDtoRequest.Price);
 
         await _productRepository.UpdateAsync(entity);       
