@@ -166,7 +166,8 @@ public class CustomerRequestValidatorsTest
     {
 
         var request = _fixture
-            .Build<CustomerRequest>()            
+            .Build<CustomerRequest>()
+            .With(x=> x.BirthDate, DateTime.Now)
             .Create();
 
 
