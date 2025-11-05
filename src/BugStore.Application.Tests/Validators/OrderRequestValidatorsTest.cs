@@ -29,8 +29,13 @@ public class OrderRequestValidatorsTest
 
         var result = _validator.Validate(request);
 
-        result.IsValid.Should().BeFalse();
-        result.Errors.Should().Contain(e => e.PropertyName == "CustomerId");
+        result.IsValid
+            .Should()
+            .BeFalse();
+
+        result.Errors
+            .Should()
+            .Contain(e => e.PropertyName == "CustomerId");
     }
 
 
@@ -44,8 +49,13 @@ public class OrderRequestValidatorsTest
 
         var result = _validator.Validate(request);
 
-        result.IsValid.Should().BeFalse();
-        result.Errors.Should().Contain(e => e.PropertyName == "Lines");
+        result.IsValid
+            .Should()
+            .BeFalse();
+
+        result.Errors
+            .Should()
+            .Contain(e => e.PropertyName == "Lines");
     }
 
     [Fact]
@@ -58,8 +68,13 @@ public class OrderRequestValidatorsTest
 
         var result = _validator.Validate(request);
 
-        result.IsValid.Should().BeTrue();
-        result.Errors.Should().BeEmpty();
+        result.IsValid
+            .Should()
+            .BeTrue();
+
+        result.Errors
+            .Should()
+            .BeEmpty();
     }
 
     [Fact]
@@ -76,8 +91,13 @@ public class OrderRequestValidatorsTest
 
         var result = _validator.Validate(request);
 
-        result.IsValid.Should().BeFalse();
-        result.Errors.Should().Contain(e => e.PropertyName == "Lines[0].ProductId");
+        result.IsValid
+            .Should()
+            .BeFalse();
+
+        result.Errors
+            .Should()
+            .Contain(e => e.PropertyName == "Lines[0].ProductId");
     }
 
     [Fact]
@@ -94,7 +114,12 @@ public class OrderRequestValidatorsTest
 
         var result = _validator.Validate(request);
 
-        result.IsValid.Should().BeFalse();
-        result.Errors.Should().Contain(e => e.PropertyName == "Lines[0].Quantity");
+        result.IsValid
+            .Should()
+            .BeFalse();
+
+        result.Errors
+            .Should()
+            .Contain(e => e.PropertyName == "Lines[0].Quantity");
     }
 }
