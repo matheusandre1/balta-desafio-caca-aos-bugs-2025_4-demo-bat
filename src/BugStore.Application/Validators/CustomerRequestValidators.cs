@@ -14,7 +14,7 @@ public class CustomerRequestValidator : AbstractValidator<CustomerRequest>
             .Must(name => !string.IsNullOrWhiteSpace(name))
             .WithMessage("Nome é Obrigatório")
             .MaximumLength(50)
-            .WithMessage("O nome deve ter no máximo 50 caracteres");
+            .WithMessage("O Nome Deve Ter No Máximo 50 Caracteres");
 
         RuleFor(x => x.Email)
             .NotEmpty()
@@ -32,9 +32,9 @@ public class CustomerRequestValidator : AbstractValidator<CustomerRequest>
 
         RuleFor(x => x.BirthDate)
             .NotEmpty()
-            .WithMessage("A data de nascimento é obrigatória")
+            .WithMessage("A Data De Nascimento É Obrigatória")
             .LessThan(DateTime.Now)
-            .WithMessage("A data de nascimento não pode ser no futuro");
+            .WithMessage("A Data Tem que ser Válida");
            
     }
     

@@ -8,15 +8,15 @@ public class ProductRequestValidators : AbstractValidator<ProductDtoRequest>
     {
         RuleFor(x => x.Title)
             .NotEmpty()
-            .WithMessage("Title é obrigatório")
+            .WithMessage("Title é Obrigatório")
             .Must(title => !string.IsNullOrWhiteSpace(title))
-            .WithMessage("Title é obrigatório");
+            .WithMessage("Title é Obrigatório");
 
         RuleFor(x => x.Description)
             .NotEmpty()
-            .WithMessage("Description é obrigatório")
+            .WithMessage("Description é Obrigatório")
             .Must(description => !string.IsNullOrWhiteSpace(description))
-            .WithMessage("Description é obrigatório");
+            .WithMessage("Description é Obrigatório");
 
         RuleFor(x=> x.Price)            
             .NotEmpty()

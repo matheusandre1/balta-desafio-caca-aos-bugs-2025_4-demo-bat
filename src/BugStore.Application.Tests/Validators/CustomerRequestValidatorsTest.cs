@@ -32,7 +32,7 @@ public class CustomerRequestValidatorsTest
             .NotBeNull();
 
         result.ShouldHaveValidationErrorFor(x => x.Name)
-          .WithErrorMessage("Name é obrigatório");
+          .WithErrorMessage("Nome é Obrigatório");
     }
 
     [Fact]
@@ -41,7 +41,7 @@ public class CustomerRequestValidatorsTest
 
         var request = _fixture
             .Build<CustomerRequest>()
-            .With(x => x.Name, "            ")
+            .With(x => x.Name, "  ")
             .Create();
 
 
@@ -53,7 +53,7 @@ public class CustomerRequestValidatorsTest
             .NotBeNull();
 
         result.ShouldHaveValidationErrorFor(x => x.Name)
-          .WithErrorMessage("Name é obrigatório");
+          .WithErrorMessage("Nome é Obrigatório");
     }
 
     [Fact]
@@ -74,8 +74,120 @@ public class CustomerRequestValidatorsTest
             .NotBeNull();
 
         result.ShouldHaveValidationErrorFor(x => x.Name)
-          .WithErrorMessage("O nome deve ter no máximo 50 caracteres");
+          .WithErrorMessage("O Nome Deve Ter No Máximo 50 Caracteres");
     }
+
+    [Fact]
+    public void GivenANullEmailField_WhenMakingARequestFromTheClient_ThenReturnAnError()
+    {
+
+        var request = _fixture
+            .Build<CustomerRequest>()
+            .With(x => x.Email, (string?)null)
+            .Create();
+
+
+        var result = _validator.TestValidate(request);
+
+
+        result.Errors
+            .Should()
+            .NotBeNull();
+
+        result.ShouldHaveValidationErrorFor(x => x.Email)
+          .WithErrorMessage("Email é Obrigatório");
+    }
+
+    [Fact]
+    public void GivenAEmailOrWhiteSpaceField_WhenMakingARequestFromTheClient_ThenReturnAnError()
+    {
+
+        var request = _fixture
+            .Build<CustomerRequest>()
+            .With(x => x.Email, " " )
+            .Create();
+
+
+        var result = _validator.TestValidate(request);
+
+
+        result.Errors
+            .Should()
+            .NotBeNull();
+
+        result.ShouldHaveValidationErrorFor(x => x.Email)
+          .WithErrorMessage("Email é Obrigatório");
+    }
+
+    [Fact]
+    public void GivenAInvalidEmailIField_WhenMakingARequestFromTheClient_ThenReturnAnError()
+    {
+
+        var request = _fixture
+            .Build<CustomerRequest>()
+            .With(x => x.Email, "jose.com.br")
+            .Create();
+
+
+        var result = _validator.TestValidate(request);
+
+
+        result.Errors
+            .Should()
+            .NotBeNull();
+
+        result.ShouldHaveValidationErrorFor(x => x.Email)
+          .WithErrorMessage("Email inválido");
+    }
+
+    [Fact]
+    public void GivenAInvalidBithDateIField_WhenMakingARequestFromTheClient_ThenReturnAnError()
+    {
+
+        var request = _fixture
+            .Build<CustomerRequest>()
+            .With(x=>x.BirthDate, DateTime.Now)
+            .Create();
+
+
+        var result = _validator.TestValidate(request);
+
+
+        result.Errors
+            .Should()
+            .NotBeNull();
+
+        result.ShouldHaveValidationErrorFor(x => x.BirthDate)
+          .WithErrorMessage("A Data Tem que ser Válida");
+    }
+
+    [Fact]
+    public void GivenAIFieldInvalid_WhenMakingARequestFromTheClient_ThenReturnAnErrors()
+    {
+
+        var request = _fixture
+            .Build<CustomerRequest>()            
+            .Create();
+
+
+        var result = _validator.TestValidate(request);
+
+
+        result.Errors
+            .Should()
+            .NotBeNull();
+
+        
+        result.ShouldHaveValidationErrorFor(x => x.Phone)
+          .WithErrorMessage("O Telefone deve ter entre 10 e 11 dígitos");
+
+        result.ShouldHaveValidationErrorFor(x => x.Email).
+            WithErrorMessage("Email inválido");
+
+        result.ShouldHaveValidationErrorFor(x => x.BirthDate)
+          .WithErrorMessage("A Data Tem que ser Válida");
+    }
+
 
 
 }

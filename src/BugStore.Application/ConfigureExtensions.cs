@@ -12,6 +12,8 @@ public static class ConfigureExtensions
         
         services.AddValidatorsFromAssemblyContaining<CustomerRequestValidator>();
         services.AddValidatorsFromAssemblyContaining<ProductRequestValidators>();        
+        services.AddValidatorsFromAssemblyContaining<OrderLineRequestValidator>();
+        services.AddValidatorsFromAssemblyContaining<OrderRequestValidators>();
         return services;
     }
 
